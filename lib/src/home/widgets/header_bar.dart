@@ -42,15 +42,13 @@ class HeaderBar extends StatelessWidget {
           const SizedBox(width: 16),
           IconButton(
             icon: const Icon(Ionicons.list_outline),
-            onPressed: () {
-              // View options logic will be implemented later
-            },
+            isSelected: viewModel.viewType == FileViewType.list,
+            onPressed: () => viewModel.setViewType(FileViewType.list),
           ),
           IconButton(
             icon: const Icon(Ionicons.grid_outline),
-            onPressed: () {
-              // View options logic will be implemented later
-            },
+            isSelected: viewModel.viewType == FileViewType.grid,
+            onPressed: () => viewModel.setViewType(FileViewType.grid),
           ),
         ],
       ),

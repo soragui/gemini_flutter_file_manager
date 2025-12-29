@@ -7,6 +7,8 @@ import 'package:find/src/data/models/file_system_entity.dart';
 import 'package:find/src/data/repositories/file_repository.dart';
 import 'package:find/src/core/errors/exceptions.dart';
 
+enum FileViewType { list, grid }
+
 class HomeViewModel extends ChangeNotifier {
   final FileRepository _fileRepository;
 
@@ -28,6 +30,16 @@ class HomeViewModel extends ChangeNotifier {
 
   bool _showHiddenFiles = false;
   bool get showHiddenFiles => _showHiddenFiles;
+
+  FileViewType _viewType = FileViewType.list;
+  FileViewType get viewType => _viewType;
+
+  void setViewType(FileViewType type) {
+    if (_viewType != type) {
+      _viewType = type;
+      notifyListeners();
+    }
+  }
 
   Future<void> navigateToHomeDirectory() async {
     final homePath = await _fileRepository.getHomeDirectory();

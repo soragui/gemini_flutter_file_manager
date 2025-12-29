@@ -6,7 +6,7 @@ A desktop file explorer application built with Flutter for Linux and macOS.
 
 -   Browse files and folders starting from your home directory.
 -   Navigate through the directory structure.
--   View file and folder names.
+-   View files and folders in a list or grid layout.
 -   Toggle visibility of hidden files (`.files`) with `Ctrl-H`.
 -   Select single or multiple files.
 -   Light and dark theme support.

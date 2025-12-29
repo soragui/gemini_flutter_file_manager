@@ -1,6 +1,6 @@
-# Modification Implementation Plan: Home Navigation and Hidden File Toggle
+# Modification Implementation Plan: Grid View and View Switching
 
-This document outlines the phased implementation plan for adding home navigation and hidden file toggling to the "Find" file explorer application.
+This document outlines the phased implementation plan for adding a grid view and view switching to the "Find" file explorer application.
 
 ## General Instructions After Each Phase
 
@@ -18,74 +18,69 @@ After completing a task:
 
 ---
 
-## Phase 1: ViewModel and Repository Changes
+## Phase 1: ViewModel and New Grid Widgets
 
-This phase focuses on updating the data layer and state management to support the new features.
+This phase focuses on updating the state management and creating the new widgets for the grid view.
 
 - [x] Run all tests to ensure the project is in a good state before starting modifications. (Skipped due to testing blockage).
-- [x] Add `_showHiddenFiles` property and its getter to `HomeViewModel`.
-- [x] Add `toggleShowHiddenFiles()` method to `HomeViewModel`.
-- [x] Add `navigateToHomeDirectory()` method to `HomeViewModel`.
-- [x] Modify `_loadDirectoryContents()` in `HomeViewModel` to pass the `showHidden` flag to the repository.
-- [x] Modify `listDirectoryContents()` in `FileRepository` to accept a `showHidden` parameter and filter hidden files.
-- [x] Update the unit tests for `FileRepository` to cover the new `showHidden` functionality. (Tests will be updated but not run).
+- [x] Create a `FileViewType` enum (`list`, `grid`).
+- [x] Add the `_viewType` property and `setViewType()` method to `HomeViewModel`.
+- [x] Create the new `file_grid_item.dart` widget.
+- [x] Create the new `file_grid_view.dart` widget.
 
 ---
 
-### Phase 1: ViewModel and Repository Changes
+### Phase 1: ViewModel and New Grid Widgets
 
 - **Date:** Monday, December 29, 2025
 - **Actions:**
-    - Added `_showHiddenFiles` property, its getter, `toggleShowHiddenFiles()` method, and `navigateToHomeDirectory()` method to `HomeViewModel`.
-    - Modified `_loadDirectoryContents()` in `HomeViewModel` to pass `_showHiddenFiles` to the repository.
-    - Modified `listDirectoryContents()` in `FileRepository` to accept `showHidden` parameter and filter hidden files.
-    - Updated `file_repository_test.dart` with commented-out tests for `showHidden` functionality.
+    - Created `FileViewType` enum (`list`, `grid`) in `home_view_model.dart`.
+    - Added `_viewType` property and `setViewType()` method to `HomeViewModel`.
+    - Created `lib/src/home/widgets/file_grid_item.dart`.
+    - Created `lib/src/home/widgets/file_grid_view.dart`.
     - Ran `dart fix`, `analyze_files`, and `dart format`.
+    - Fixed `directive_after_declaration` error by moving `FileViewType` enum after imports in `home_view_model.dart`.
 - **Learnings:**
-    - Implementing core logic for hidden file filtering and home directory navigation.
+    - Correct placement of enums relative to import statements is crucial in Dart.
 - **Surprises:**
     - None.
 - **Deviations:**
     - All tests for this phase were skipped or commented out due to ongoing `run_shell_command` issues preventing test execution.
 - **Completed Tasks:**
     - [x] Run all tests to ensure the project is in a good state before starting modifications. (Skipped due to testing blockage).
-    - [x] Add `_showHiddenFiles` property and its getter to `HomeViewModel`.
-    - [x] Add `toggleShowHiddenFiles()` method to `HomeViewModel`.
-    - [x] Add `navigateToHomeDirectory()` method to `HomeViewModel`.
-    - [x] Modify `_loadDirectoryContents()` in `HomeViewModel` to pass the `showHidden` flag to the repository.
-    - [x] Modify `listDirectoryContents()` in `FileRepository` to accept a `showHidden` parameter and filter hidden files.
-    - [x] Update the unit tests for `FileRepository` to cover the new `showHidden` functionality. (Tests will be updated but not run).
+    - [x] Create a `FileViewType` enum (`list`, `grid`).
+    - [x] Add the `_viewType` property and `setViewType()` method to `HomeViewModel`.
+    - [x] Create the new `file_grid_item.dart` widget.
+    - [x] Create the new `file_grid_view.dart` widget.
 
 ---
 
-## Phase 2: UI and Interaction
+## Phase 2: UI Integration and Logic
 
 This phase focuses on wiring up the UI to the new view model logic.
 
-- [x] Update `sidebar.dart` to call `navigateToHomeDirectory()` on the "Home" button tap.
-- [x] Wrap the `Scaffold` in `home_screen.dart` with a `FocusableActionDetector`.
-- [x] Define and connect the `ToggleHiddenFilesIntent` and the `Ctrl-H` shortcut to the `toggleShowHiddenFiles()` method in the view model.
+- [x] Update `header_bar.dart` to call `setViewType()` and visually reflect the selected view type.
+- [x] Update `home_screen.dart` to conditionally render `FileListView` or `FileGridView` based on the `viewType`.
 
 ---
 
-### Phase 2: UI and Interaction
+### Phase 2: UI Integration and Logic
 
 - **Date:** Monday, December 29, 2025
 - **Actions:**
-    - Updated `sidebar.dart` to call `navigateToHomeDirectory()` on "Home" button tap.
-    - Wrapped `HomeScreen` in `FocusableActionDetector`.
-    - Defined `ToggleHiddenFilesIntent` and connected the `Ctrl-H` shortcut to `toggleShowHiddenFiles()` in `HomeViewModel`.
+    - Updated `header_bar.dart` to use `setViewType()` and visually indicate the selected view type for list/grid buttons.
+    - Updated `home_screen.dart` to conditionally render `FileListView` or `FileGridView` based on `viewModel.viewType`.
     - Ran `dart fix`, `analyze_files`, and `dart format`.
+    - Fixed `unreachable_switch_default` error in `home_screen.dart` by removing the `default` case from the switch statement.
 - **Learnings:**
-    - `FocusableActionDetector` provides a robust way to handle global keyboard shortcuts in Flutter desktop applications.
+    - Conditional rendering in `HomeScreen` effectively switches between list and grid views.
 - **Surprises:**
     - None.
 - **Deviations:**
     - No tests were created for these UI interactions due to the ongoing `run_shell_command` issues.
 - **Completed Tasks:**
-    - [x] Update `sidebar.dart` to call `navigateToHomeDirectory()` on the "Home" button tap.
-    - [x] Wrap the `Scaffold` in `home_screen.dart` with a `FocusableActionDetector`.
-    - [x] Define and connect the `ToggleHiddenFilesIntent` and the `Ctrl-H` shortcut to the `toggleShowHiddenFiles()` method in the view model.
+    - [x] Update `header_bar.dart` to call `setViewType()` and visually reflect the selected view type.
+    - [x] Update `home_screen.dart` to conditionally render `FileListView` or `FileGridView` based on the `viewType`.
 
 ---
 

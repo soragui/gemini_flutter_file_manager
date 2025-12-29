@@ -4,7 +4,7 @@ This document provides a detailed overview of the "Find" file explorer applicati
 
 ## Application Purpose
 
-The "Find" file explorer is a desktop application for Linux and macOS, built with Flutter. Its purpose is to provide a simple, intuitive, and visually appealing interface for browsing and managing files and folders on the local file system, starting from the user's home directory. It includes features for navigating to the home directory and toggling the visibility of hidden files.
+The "Find" file explorer is a desktop application for Linux and macOS, built with Flutter. Its purpose is to provide a simple, intuitive, and visually appealing interface for browsing and managing files and folders on the local file system, starting from the user's home directory. It includes features for navigating to the home directory, toggling the visibility of hidden files, and switching between list and grid views for file display.
 
 ## Implementation Details
 
@@ -13,7 +13,7 @@ The "Find" file explorer is a desktop application for Linux and macOS, built wit
 The application follows a Model-View-ViewModel (MVVM) inspired architecture to ensure a clean separation of concerns.
 
 -   **Model**: The data layer, consisting of data models (`FileSystemEntity`, `FileEntity`, `DirectoryEntity`) and the `FileRepository`. The `FileRepository` is responsible for all interactions with the file system, using `dart:io`.
--   **View**: The UI layer, composed of Flutter widgets. The main view is the `HomeScreen`, which is composed of smaller, reusable widgets like `Sidebar`, `HeaderBar`, `FileListView`, `FileItem`, and `StatusBar`.
+-   **View**: The UI layer, composed of Flutter widgets. The main view is the `HomeScreen`, which is composed of smaller, reusable widgets like `Sidebar`, `HeaderBar`, `FileListView`, `FileGridView`, `FileItem`, `FileGridItem`, and `StatusBar`.
 -   **ViewModel**: The `HomeViewModel` acts as the bridge between the View and the Model. It uses `ChangeNotifier` and `provider` to manage the application's state and business logic, such as navigation, file loading, selection, and toggling hidden file visibility.
 
 ### File Layout
@@ -34,7 +34,9 @@ The application follows a Model-View-ViewModel (MVVM) inspired architecture to e
         -   `sidebar.dart`
         -   `header_bar.dart`
         -   `file_list_view.dart`
+        -   `file_grid_view.dart`
         -   `file_item.dart`
+        -   `file_grid_item.dart`
         -   `status_bar.dart`
 -   `test/`: Contains the unit tests.
     -   `file_repository_test.dart`: Tests for the `FileRepository`.
