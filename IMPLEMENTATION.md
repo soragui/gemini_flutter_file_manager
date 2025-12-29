@@ -22,13 +22,13 @@ After completing a task:
 
 This phase focuses on setting up the basic Flutter project structure and committing the initial boilerplate.
 
-- [ ] Create an empty Flutter project named `Find` in the current directory (`.`), supporting macOS and Linux platforms.
-- [ ] Remove any boilerplate in the new package that will be replaced, including the `test` directory, if any.
-- [ ] Update the description of the package in the `pubspec.yaml` and set the version number to `0.1.0`.
-- [ ] Update the `README.md` to include a short placeholder description of the package.
-- [ ] Create the `CHANGELOG.md` to have the initial version of `0.1.0`.
-- [ ] Commit this empty version of the package to the current branch.
-- [ ] After committing the change, start running the app with the `launch_app` tool on the user's preferred device.
+- [x] Create an empty Flutter project named `Find` in the current directory (`.`), supporting macOS and Linux platforms.
+- [x] Remove any boilerplate in the new package that will be replaced, including the `test` directory, if any.
+- [x] Update the description of the package in the `pubspec.yaml` and set the version number to `0.1.0`.
+- [x] Update the `README.md` to include a short placeholder description of the package.
+- [x] Create the `CHANGELOG.md` to have the initial version of `0.1.0`.
+- [x] Commit this empty version of the package to the current branch.
+- [x] After committing the change, start running the app with the `launch_app` tool on the user's preferred device.
 
 ---
 
@@ -119,19 +119,29 @@ The final phase involves comprehensive documentation and a final review.
 
 ### Phase 1: Project Setup and Initial Commit
 
-- **Date:** 2025-12-25
+- **Date:** Monday, December 29, 2025
 - **Actions:**
-    - Initialized git repository.
-    - Generated `DESIGN.md`.
-    - Researched relevant Flutter desktop development topics.
-    - Refined `DESIGN.md` based on research.
+    - Created a new git branch `feature/find-app`.
+    - Created an empty Flutter project named `find` in the current directory, targeting macOS and Linux.
+    - Removed `macos/RunnerTests` boilerplate.
+    - Updated `pubspec.yaml` description to "A file explorer application for desktop."
+    - Updated `README.md` with a placeholder description.
+    - Created `CHANGELOG.md` with initial version `0.1.0`.
+    - Committed initial project setup.
+    - Launched the application on the `linux` device using `flutter run -d linux`.
 - **Learnings:**
-    - `path_provider` is crucial for cross-platform home directory access.
-    - `dart:io` is suitable for file system operations.
-    - Material Design 3 guidelines and `flutter_vector_icons` align well with the UI vision.
-- **Surprises:** The `platform-channels` documentation link was broken, but `dart:io` and `path_provider` mitigate this.
-- **Deviations:** None.
+    - The `launch_app` tool failed with a `ProcessException`, but `flutter run -d linux` successfully launched the application, indicating an issue with `launch_app`'s execution context rather than the Flutter environment itself.
+- **Surprises:**
+    - Encountered a `ProcessException` when using `launch_app`, necessitating a direct `flutter run` command.
+- **Deviations:**
+    - Used `flutter run -d linux` via `run_shell_command` instead of `launch_app` due to an unexpected tool error.
 - **Completed Tasks:**
-    - [x] Wait for user approval of DESIGN.md (from previous todo list).
+    - [x] Create an empty Flutter project named `Find` in the current directory (`.`), supporting macOS and Linux platforms.
+    - [x] Remove any boilerplate in the new package that will be replaced, including the `test` directory, if any.
+    - [x] Update the description of the package in the `pubspec.yaml` and set the version number to `0.1.0`.
+    - [x] Update the `README.md` to include a short placeholder description of the package.
+    - [x] Create the `CHANGELOG.md` to have the initial version of `0.1.0`.
+    - [x] Commit this empty version of the package to the current branch.
+    - [x] After committing the change, start running the app with the `launch_app` tool on the user's preferred device.
 
 ---
