@@ -18,7 +18,10 @@ class FileRepository {
   }
 
   /// Lists the contents of a given directory.
-  Future<List<FileSystemEntity>> listDirectoryContents(String path) async {
+  Future<List<FileSystemEntity>> listDirectoryContents(
+    String path, {
+    bool showHidden = false,
+  }) async {
     final directory = Directory(path);
     if (!await directory.exists()) {
       throw FileSystemException('Directory not found: $path');
@@ -27,8 +30,12 @@ class FileRepository {
     final List<FileSystemEntity> contents = [];
     try {
       await for (final entity in directory.list()) {
-        final stat = await entity.stat();
         final name = entity.path.split('/').last;
+        if (!showHidden && name.startsWith('.')) {
+          continue; // Skip hidden files
+        }
+
+        final stat = await entity.stat();
 
         if (entity is File) {
           contents.add(
@@ -44,7 +51,11 @@ class FileRepository {
           // This might be slow for large directories, consider optimizing later
           int? itemCount;
           try {
-            itemCount = await entity.list().length;
+            // Count items only if not hidden or if showing hidden files.
+            // This prevents errors on trying to list contents of hidden directories with restricted permissions.
+            if (showHidden || !name.startsWith('.')) {
+              itemCount = await entity.list().length;
+            }
           } catch (e) {
             // Handle permission errors or other issues when listing sub-directory
             debugPrint('Error counting items in ${entity.path}: $e');

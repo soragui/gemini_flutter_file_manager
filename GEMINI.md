@@ -4,7 +4,7 @@ This document provides a detailed overview of the "Find" file explorer applicati
 
 ## Application Purpose
 
-The "Find" file explorer is a desktop application for Linux and macOS, built with Flutter. Its purpose is to provide a simple, intuitive, and visually appealing interface for browsing and managing files and folders on the local file system, starting from the user's home directory.
+The "Find" file explorer is a desktop application for Linux and macOS, built with Flutter. Its purpose is to provide a simple, intuitive, and visually appealing interface for browsing and managing files and folders on the local file system, starting from the user's home directory. It includes features for navigating to the home directory and toggling the visibility of hidden files.
 
 ## Implementation Details
 
@@ -14,7 +14,7 @@ The application follows a Model-View-ViewModel (MVVM) inspired architecture to e
 
 -   **Model**: The data layer, consisting of data models (`FileSystemEntity`, `FileEntity`, `DirectoryEntity`) and the `FileRepository`. The `FileRepository` is responsible for all interactions with the file system, using `dart:io`.
 -   **View**: The UI layer, composed of Flutter widgets. The main view is the `HomeScreen`, which is composed of smaller, reusable widgets like `Sidebar`, `HeaderBar`, `FileListView`, `FileItem`, and `StatusBar`.
--   **ViewModel**: The `HomeViewModel` acts as the bridge between the View and the Model. It uses `ChangeNotifier` and `provider` to manage the application's state and business logic, such as navigation, file loading, and selection.
+-   **ViewModel**: The `HomeViewModel` acts as the bridge between the View and the Model. It uses `ChangeNotifier` and `provider` to manage the application's state and business logic, such as navigation, file loading, selection, and toggling hidden file visibility.
 
 ### File Layout
 

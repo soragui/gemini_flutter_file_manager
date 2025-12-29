@@ -26,6 +26,22 @@ class HomeViewModel extends ChangeNotifier {
   List<FileSystemEntity> _selectedEntities = [];
   List<FileSystemEntity> get selectedEntities => _selectedEntities;
 
+  bool _showHiddenFiles = false;
+  bool get showHiddenFiles => _showHiddenFiles;
+
+  Future<void> navigateToHomeDirectory() async {
+    final homePath = await _fileRepository.getHomeDirectory();
+    _selectedEntities = []; // Clear selection when navigating
+    await _loadDirectoryContents(homePath);
+  }
+
+  void toggleShowHiddenFiles() {
+    _showHiddenFiles = !_showHiddenFiles;
+    _loadDirectoryContents(
+      _currentPath,
+    ); // Reload current directory with new setting
+  }
+
   Future<void> _initHomeDirectory() async {
     _isLoading = true;
     notifyListeners();
@@ -45,7 +61,10 @@ class HomeViewModel extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
     try {
-      _displayedEntities = await _fileRepository.listDirectoryContents(path);
+      _displayedEntities = await _fileRepository.listDirectoryContents(
+        path,
+        showHidden: _showHiddenFiles,
+      );
       _currentPath = path; // Update current path only on successful load
     } on FileSystemException catch (e) {
       debugPrint('Error loading directory contents: ${e.message}');

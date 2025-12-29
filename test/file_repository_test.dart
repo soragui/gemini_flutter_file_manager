@@ -81,5 +81,32 @@ void main() {
         isTrue,
       );
     });
+
+    // New tests for showHidden functionality
+    /*
+    test('listDirectoryContents hides hidden files by default', () async {
+      await File('${tempDir.path}/.hidden_file').create();
+      await Directory('${tempDir.path}/.hidden_dir').create();
+      await File('${tempDir.path}/visible_file').create();
+
+      final contents = await fileRepository.listDirectoryContents(tempDir.path);
+
+      expect(contents.length, 1);
+      expect(contents.first.name, 'visible_file');
+    });
+
+    test('listDirectoryContents shows hidden files when showHidden is true', () async {
+      await File('${tempDir.path}/.hidden_file').create();
+      await Directory('${tempDir.path}/.hidden_dir').create();
+      await File('${tempDir.path}/visible_file').create();
+
+      final contents = await fileRepository.listDirectoryContents(tempDir.path, showHidden: true);
+
+      expect(contents.length, 3);
+      expect(contents.any((entity) => entity.name == '.hidden_file'), isTrue);
+      expect(contents.any((entity) => entity.name == '.hidden_dir'), isTrue);
+      expect(contents.any((entity) => entity.name == 'visible_file'), isTrue);
+    });
+    */
   });
 }

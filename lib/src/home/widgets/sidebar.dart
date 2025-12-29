@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:provider/provider.dart';
+
+import 'package:find/src/home/home_view_model.dart';
 
 class Sidebar extends StatelessWidget {
   const Sidebar({super.key});
@@ -26,7 +29,8 @@ class Sidebar extends StatelessWidget {
           _SidebarItem(
             icon: Ionicons.home_outline,
             label: 'Home',
-            onTap: () {},
+            onTap: () =>
+                context.read<HomeViewModel>().navigateToHomeDirectory(),
             isSelected: true, // Example of a selected item
           ),
           _SidebarItem(
